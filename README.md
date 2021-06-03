@@ -4,4 +4,16 @@
 
 ##apiList
 导出一个接口对象，proxy 为代理的配置。productHost 为上线时可能会用到的接口地址，可以用 process.env 中的配置来切换地址链接
-(`) { geta: { method: 'get', path: '/aa', proxy: '/api', productHost: 'http://abc.com', }, getb: { method: 'get', path: '/abc/:param', proxy: '/sys', }, } (`)
+<br>{<br>
+geta: {<br>
+&ensp;method: 'get',<br>
+&ensp;path: '/aa',<br>
+&ensp;proxy: '/api',<br>
+&ensp;productHost: 'http://abc.com',<br>
+},<br>
+getb: {<br>
+&ensp;method: 'get',<br>
+&ensp;path: '/abc/:param',<br>
+&ensp;proxy: '/sys',<br>
+},<br>
+}
