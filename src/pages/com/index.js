@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
   Form,
@@ -25,6 +25,18 @@ const formItemLayout = {
   },
 }
 
+/* const list = [
+  {
+    label: 'Plain Text',
+    hasFeedback: true,
+    validateStatus: 'error',
+    help: 'Should be combination of numbers & alphabets',
+    value,
+    onChange,
+    type: 'select',
+  },
+] */
+
 const normFile = (e) => {
   console.log('Upload event:', e)
 
@@ -35,21 +47,22 @@ const normFile = (e) => {
   return e && e.fileList
 }
 
-const Demo = () => {
+const Demo = (props) => {
   const onFinish = (values) => {
     console.log('Received values of form: ', values)
   }
+  const onchange = (e) => {
+    console.log(e)
+  }
+  console.log(props.initval)
 
   return (
     <Form
       name="validate_other"
       {...formItemLayout}
+      onValuesChange={onchange}
       onFinish={onFinish}
-      initialValues={{
-        'input-number': 3,
-        'checkbox-group': ['A', 'B'],
-        rate: 3.5,
-      }}
+      initialValues={props.initval}
     >
       <Form.Item
         label="Plain Text"
@@ -105,19 +118,6 @@ const Demo = () => {
         <Switch />
       </Form.Item>
 
-      <Form.Item name="slider" label="Slider">
-        <Slider
-          marks={{
-            0: 'A',
-            20: 'B',
-            40: 'C',
-            60: 'D',
-            80: 'E',
-            100: 'F',
-          }}
-        />
-      </Form.Item>
-
       <Form.Item name="radio-group" label="Radio.Group">
         <Radio.Group>
           <Radio value="a">item 1</Radio>
@@ -141,74 +141,6 @@ const Demo = () => {
           <Radio.Button value="b">item 2</Radio.Button>
           <Radio.Button value="c">item 3</Radio.Button>
         </Radio.Group>
-      </Form.Item>
-
-      <Form.Item name="checkbox-group" label="Checkbox.Group">
-        <Checkbox.Group>
-          <Row>
-            <Col span={8}>
-              <Checkbox
-                value="A"
-                style={{
-                  lineHeight: '32px',
-                }}
-              >
-                A
-              </Checkbox>
-            </Col>
-            <Col span={8}>
-              <Checkbox
-                value="B"
-                style={{
-                  lineHeight: '32px',
-                }}
-                disabled
-              >
-                B
-              </Checkbox>
-            </Col>
-            <Col span={8}>
-              <Checkbox
-                value="C"
-                style={{
-                  lineHeight: '32px',
-                }}
-              >
-                C
-              </Checkbox>
-            </Col>
-            <Col span={8}>
-              <Checkbox
-                value="D"
-                style={{
-                  lineHeight: '32px',
-                }}
-              >
-                D
-              </Checkbox>
-            </Col>
-            <Col span={8}>
-              <Checkbox
-                value="E"
-                style={{
-                  lineHeight: '32px',
-                }}
-              >
-                E
-              </Checkbox>
-            </Col>
-            <Col span={8}>
-              <Checkbox
-                value="F"
-                style={{
-                  lineHeight: '32px',
-                }}
-              >
-                F
-              </Checkbox>
-            </Col>
-          </Row>
-        </Checkbox.Group>
       </Form.Item>
 
       <Form.Item name="rate" label="Rate">

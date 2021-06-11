@@ -51,10 +51,14 @@ const apiAxios = {}
 methods.forEach((method) => {
   const isPst = pstMethods.indexOf(method) != -1
   apiAxios[method] = (url, obj = {}) => {
-    let { params, config = {} } = obj
+    let { params, config = {}, lazyput } = obj
     // console.log(params)
     url = url.replace(/(:[a-zA-z0-9]+)/gi, function (sep) {
-      return params[sep.slice(1)]
+      const param = params[sep.slice(1)]
+      if (!lazyput) {
+        delete params[sep.slice(1)]
+      }
+      return param
     })
     params = isPst ? params : { params, ...config }
     // console.log('url:', url, params, config)
@@ -63,6 +67,7 @@ methods.forEach((method) => {
 })
 
 apiAxios.send = function (url, obj) {
+  obj.lazyput = obj.lazyput == null ? url.lazyput : obj.lazyput
   this[url.method](url.path, obj)
 }
 

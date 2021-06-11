@@ -3,7 +3,7 @@ import apiAxios from '@/api'
 
 function Index() {
   useEffect(() => {
-    apiAxios.send(apiAxios.geta, {
+    apiAxios.geta({
       params: {
         a: 1,
       },
@@ -11,7 +11,15 @@ function Index() {
         headers: { TOKEN: '1' },
       },
     })
-    apiAxios.send(apiAxios.getb, {
+    apiAxios.getab({
+      params: {
+        a: 'abparams',
+      },
+      config: {
+        headers: { TOKEN: '1' },
+      },
+    })
+    apiAxios.getb({
       params: {
         a: 1,
       },

@@ -10,17 +10,29 @@ import {
 import 'antd/dist/antd.css'
 import './App.scss'
 
-import Com from '@/pages/com'
+import Com from './com'
 
 import { RouteWithRoutes } from '@/util'
 
 import routes from '@/router'
 
 export default class App extends Component {
+  state = {
+    initval: {},
+  }
+  componentDidMount() {
+    this.setState({
+      initval: {
+        'input-number': 3,
+        'checkbox-group': ['A', 'B'],
+        rate: 3.5,
+      },
+    })
+  }
   render() {
     return (
       <HashRouter>
-        <Com />
+        {this.state.initval && <Com initval={this.state.initval} />}
         <ul>
           <li>
             <Link to="/page1">page1</Link>
