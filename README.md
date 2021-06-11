@@ -27,9 +27,9 @@ getb: {<br>
 <br>
 apiAxios.geta({<br>
 &ensp;params: {<br>
-&ensp;a: 1,<br>
-},<br>
-&ensp;config: {<br> // 这个是 axios 的配置
-&ensp;headers: { TOKEN: '1' },<br>
-},<br>
+&ensp;&ensp;a: 1,<br>
+&ensp;},<br>
+&ensp;config: { // 这个是 axios 的配置<br>
+&ensp;&ensp;headers: { TOKEN: '1' },<br>
+&ensp;},<br>
 })<br>
