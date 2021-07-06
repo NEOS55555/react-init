@@ -1,5 +1,7 @@
 import axiosOri from 'axios'
 import { HTTP, CONFIG } from '@/constant'
+import { eventBus } from '@/util'
+
 // const { API_URL } = comConstant
 // console.log(CONFIG.BASEURL)
 const axios = axiosOri.create({
@@ -20,25 +22,38 @@ axios.interceptors.request.use(
   }
 )
 
+function dealResCode(status) {
+  switch (status) {
+    case HTTP.CODE_401:
+      console.log('重新登陆')
+      eventBus.emit('history#login')
+      return false
+    case HTTP.CODE_200:
+      return true
+    default:
+      return true
+  }
+}
+
 // 添加响应拦截器
 axios.interceptors.response.use(
   function (response) {
     const { data = {}, status } = response
-    switch (status) {
-      case HTTP.CODE_401:
-        console.log('重新登陆')
-        return
-      case HTTP.CODE_200:
-        return data
-      default:
-        return Promise.reject(response)
+    if (dealResCode(status)) {
+      return data
     }
+    return Promise.reject(response)
     /* if (data[CONFIG.RESPONSE_CODE] !== HTTP.CODE_200) {
       return Promise.reject(response)
     } */
     // return data
   },
-  function (err) {
+  function (err, a) {
+    console.log(err, a)
+    console.log(err.response)
+    const { status } = err.response
+    dealResCode(status)
+
     return Promise.reject(err)
   }
 )

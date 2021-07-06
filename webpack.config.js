@@ -13,7 +13,7 @@ module.exports = {
     },
     proxy: {
       '/api': {
-        target: 'http://localhost:8008',
+        target: 'http://localhost:8018',
         // 如果你不想始终传递 /api ，则需要重写路径：
         pathRewrite: { '^/api': '' },
       },

@@ -11,13 +11,13 @@ if (isDev) {
     throw Error(`apiList不可添加名称为${item}的接口`)
   }
 }
-function send(url, config) {
-  url = JSON.parse(JSON.stringify(url))
+function send(url, config = {}) {
+  let path = url.path
   if (isDev) {
-    url.path = (url.proxy || '') + url.path
+    path = (url.proxy || process.env.PROXY_API || '') + path
   }
-  url.path = (url.productHost || '') + url.path
-  return apiAxios.send(url, config)
+  path = (url.proxyHost || '') + path
+  return apiAxios.send({ ...url, path }, config)
 }
 const apiAxiosSend = {}
 for (let key in apiList) {

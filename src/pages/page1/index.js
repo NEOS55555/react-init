@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import apiAxios from '@/api'
+import { Button } from 'antd'
 
 function Index() {
   useEffect(() => {
-    apiAxios.geta({
+    /* apiAxios.geta({
       params: {
         a: 1,
       },
@@ -18,7 +19,7 @@ function Index() {
       config: {
         headers: { TOKEN: '1' },
       },
-    })
+    }) */
     apiAxios.getb({
       params: {
         a: 1,
@@ -29,7 +30,18 @@ function Index() {
     })
     console.log('进入页面1')
   }, [])
-  return <div>页面1</div>
+  return (
+    <div>
+      页面1{' '}
+      <Button
+        onClick={() => {
+          apiAxios.login()
+        }}
+      >
+        登陆
+      </Button>
+    </div>
+  )
 }
 
 export default Index

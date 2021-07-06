@@ -7,52 +7,6 @@ import { RouteWithRoutes, routerPathTrans } from './routerUtil'
 
 export { RouteWithRoutes, routerPathTrans }
 
-function getFullScreenCb() {
-  const el = document.createElement('button')
-  el.style.display = 'none'
-  document.body.appendChild(el)
-  var isFullScreen = () =>
-    document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen
-
-  function toFullScreen() {
-    if (isFullScreen()) {
-      return
-    }
-    //进入全屏,多重短路表达式
-    ;(el.requestFullscreen && el.requestFullscreen()) ||
-      (el.mozRequestFullScreen && el.mozRequestFullScreen()) ||
-      (el.webkitRequestFullscreen && el.webkitRequestFullscreen()) ||
-      (el.msRequestFullscreen && el.msRequestFullscreen())
-  }
-  function exitFullScreen() {
-    if (isFullScreen()) {
-      //退出全屏,三目运算符
-      document.exitFullscreen
-        ? document.exitFullscreen()
-        : document.mozCancelFullScreen
-        ? document.mozCancelFullScreen()
-        : document.webkitExitFullscreen
-        ? document.webkitExitFullscreen()
-        : ''
-    }
-  }
-  function toggleFullScreen() {
-    if (isFullScreen()) {
-      exitFullScreen()
-    } else {
-      toFullScreen()
-    }
-  }
-
-  return {
-    isFullScreen,
-    toFullScreen,
-    exitFullScreen,
-    toggleFullScreen,
-  }
-}
-const fullScreenObj = getFullScreenCb()
-
 export const isLegal = (str = '') => {
   if (typeof str === 'number') {
     return !isNaN(str)
@@ -124,7 +78,7 @@ export const getFilsData = (invoker, paths) => {
   })
 }
 
-export { getBase64, fullScreenObj, getRand, doubced, eventBus }
+export { getBase64, getRand, doubced, eventBus }
 
 export const isBlankObj = (obj = {}) => {
   return Object.keys(obj).length == 0

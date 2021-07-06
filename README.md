@@ -9,8 +9,8 @@
 geta: {<br>
 &ensp;method: 'get',<br>
 &ensp;path: '/aa',<br>
-&ensp;proxy: '/api',<br>
-&ensp;productHost: 'http://abc.com',<br>
+&ensp;proxy: '/api',<br> // 如果不填，则会默认使用 process.env.PROXY_API
+&ensp;proxyHost: 'http://abc.com',<br>
 },<br>
 getb: {<br>
 &ensp;method: 'get',<br>
